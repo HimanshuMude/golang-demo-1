@@ -15,7 +15,7 @@ type Student struct {
 }
 
 type Class struct {
-	Students []Student
+	Engineers []Student
 }
 
 // Take input
@@ -66,7 +66,7 @@ func (c *Class) NewClass() {
 	}
 
 	// fmt.Println(studentsArray)
-	c.Students = studentsArray
+	c.Engineers = studentsArray
 
 }
 
@@ -86,7 +86,7 @@ func (c *Class) AddStudent() {
 		Marks:  marks,
 	}
 
-	c.Students = append(c.Students, entry)
+	c.Engineers = append(c.Engineers, entry)
 
 	fmt.Println("Student Added Successfully")
 	fmt.Println()
@@ -95,58 +95,10 @@ func (c *Class) AddStudent() {
 }
 
 func (c *Class) ShowStudents() {
-	for _, student := range c.Students {
+	for _, student := range c.Engineers {
 		name, roll, marks := student.Name, student.RollNo, student.Marks
 		fmt.Printf("Name: %s\nRoll No: %s\nMarks: %d\n", name, roll, marks)
 		fmt.Println()
 	}
 }
 
-func (c *Class) UpdateStudent() {
-	roll := inputRoll()
-	var i int
-	for idx, student := range c.Students {
-		if student.RollNo == roll {
-			i = idx
-			break
-		}
-	}
-
-	newName := inputName()
-
-	newRoll := inputRoll()
-
-	newMarks := inputMarks()
-
-	c.Students[i] = Student{
-		Name:   newName,
-		RollNo: newRoll,
-		Marks:  newMarks,
-	}
-
-	fmt.Println("Data updated successfully")
-	fmt.Println()
-
-	//Update it in db.txt
-}
-
-func (c *Class) DeleteStudent() {
-	roll := inputRoll()
-	var i int
-	for idx, student := range c.Students {
-		if student.RollNo == roll {
-			i = idx
-			break
-		}
-	}
-
-	dummyArr := c.Students
-
-	dummyArr = append(dummyArr[:i], dummyArr[i+1:]...)
-	c.Students = dummyArr
-	fmt.Println("Data deleted successfully")
-	fmt.Println()
-
-	//Update the data in db.txt
-
-}
